@@ -6,9 +6,23 @@ use Yii;
 
 class PostController extends AppController
 {
-    public function actionTest(){
+    public $layout = 'basic';
+    //Изменение шаблона страниц для всех отображений контроллера
+
+    public function actionIndex(){
+
+        $kazel = 'kazel';
         $names = ['Иванов','Петров','Сидоров'];
-        //$this->myDebug(Yii::$app);
-        return $this->render('Test', ['names' => $names]);
+        //$this->myDebug($names);
+        return $this->render('test', ['names' => $names, 'kazel']);
     }
+
+    public function actionShow()
+    {
+        //Изменение шаблона страницы только для отображения show
+        //UPD: post/index -> шаблон main; post/show -> шаблон basic;
+        //$this->layout = 'basic';
+        return $this->render('show');
+    }
+
 }

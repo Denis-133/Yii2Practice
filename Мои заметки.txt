@@ -1,0 +1,70 @@
+1) В папке views -> папка site именуется по названию контроллера, отвечающего за представление
+SiteController.php -> отвечает за папку site 
+2) Вложенные контроллеры приложения , что это ? 
+Создаем в папке controllers папку admin -> controllers/admin -> создаем гласс UserController.php который будет отвечать за работу
+с пользователями. 
+Прим.
+class UserController extends AppController
+{
+ public function actionIndex(){
+     $hi = "Hello Admin";
+     return $this->render('index', compact('hi'));
+ }
+}
+
+Чтобы получить доступ к этому контроллеру в представлении нужно в адресной строке прописать url вида:
+site/admin/user/index
+
+Очень важно на этом этапе следить за неймспейсами!
+Index - дефолтный action для отображения через адресную строку
+
+3)Если хотим создать action из  двух слов 
+public function action BlogPost(){} обращение в Url будет таким -> /my/blog-post 
+
+4)Общий контроллер приложения, доступный из любой точки.
+Yii/web/controller -> наследует -> наш общий контроллер -> наследуте -> контроллер локальный MyController, UserController и т.д.
+5) В представлениях можно использовать и простые публичные функци. Создать functions_my.php -> подключить их в папке web/index.php
+спокойно работаем отладка и т.д.
+
+6)Изменение шаблонов страниц, можно глобально в config/web.php добавить ключ 'layout' => 'название шаблона'(примениться ко всему проекту)
+<?php
+
+namespace app\controllers;
+
+use Yii;
+
+class PostController extends AppController
+{
+    //public $layout = 'basic';
+    //Изменение шаблона страниц для всех отображений контроллера
+
+    public function actionIndex(){
+
+        $kazel = 'kazel';
+        $names = ['Иванов','Петров','Сидоров'];
+        //$this->myDebug($names);
+        return $this->render('test', ['names' => $names, 'kazel']);
+    }
+
+    public function actionShow()
+    {
+        //Изменение шаблона страницы только для отображения show 
+        //UPD: post/index -> шаблон main; post/show -> шаблон basic;
+        $this->layout = 'basic';
+        return $this->render('show');
+    }
+
+}
+
+Урок 6. Подключение стилей и js скриптов в папке assets/AppAssets.php, сами стили и скрипты располагаем в папке /web в папках css и js.
+Важно помнить, что обязательно соблюдать структуру разметки с помощью методов <?php $this->beginPage() ?> ; <?php $this->head() ?>  и т.д.СМ. ДОКУМЕНТАЦИЮ
+Что еще важно! Подключить все зависимости !
+use app\widgets\Alert;
+use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use app\assets\AppAsset;
+
+AppAsset::register($this);
+И зарегистрировать шаблон!
