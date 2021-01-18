@@ -11,10 +11,15 @@ class PostController extends AppController
 
     public function actionIndex(){
 
+        if (Yii::$app->request->isAjax){
+            debug($_GET);
+            return 'test';
+        }
         $kazel = 'kazel';
         $names = ['Иванов','Петров','Сидоров'];
         //$this->myDebug($names);
         return $this->render('test', ['names' => $names, 'kazel']);
+        //Тут вывожу с какого то херу шаблон test.php из view
     }
 
     public function actionShow()

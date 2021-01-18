@@ -1,1 +1,1 @@
-console.log('Hello Denis');
+$('.container').append('<p>Hello Denis, this raw from js script</p>');

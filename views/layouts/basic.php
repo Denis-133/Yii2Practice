@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -23,8 +24,18 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<h1>Hello Denis</h1>
-<p><?=$content ?></p>
+<div class="wrap">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><?= Html::a('Главная', '/web/') ?></li>
+            <li role="presentation"><?= Html::a('Статьи', ['post/index']) ?></li>
+            <li role="presentation"><?= Html::a('Статья', ['post/show']) ?></li>
+        </ul>
+    <p><?=$content ?></p>
+    </div>
+</div>
+
+
 
 <?php $this->endBody() ?>
 </body>
