@@ -9,16 +9,24 @@ class PostController extends AppController
     public $layout = 'basic';
     //Изменение шаблона страниц для всех отображений контроллера
 
+    //Фильтр, применяющийся к коду страницы до выполнения и рендеринга каких либо действий
+    public function beforeAction($action){
+        if($action->id=='index'){
+            //Отключение csrf токена проверки формы на определенной страницы, до выполнения инструкций основного метода
+            $this->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex(){
 
         if (Yii::$app->request->isAjax){
-            debug($_GET);
+            Debug(Yii::$app->request->post());
             return 'test';
         }
-        $kazel = 'kazel';
         $names = ['Иванов','Петров','Сидоров'];
         //$this->myDebug($names);
-        return $this->render('test', ['names' => $names, 'kazel']);
+        return $this->render('test', ['names' => $names]);
         //Тут вывожу с какого то херу шаблон test.php из view
     }
 
