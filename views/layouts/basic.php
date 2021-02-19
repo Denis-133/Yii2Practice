@@ -10,7 +10,6 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
-
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -22,6 +21,7 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <?php $this->head() ?>
+    <title><?= $this->title ?></title>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -32,10 +32,13 @@ AppAsset::register($this);
             <li role="presentation"><?= Html::a('Статьи', ['post/index']) ?></li>
             <li role="presentation"><?= Html::a('Статья', ['post/show']) ?></li>
         </ul>
+    <?php if (isset($this->blocks['block1'])): ?>
+        <?php echo $this->blocks['block1']; ?>
+    <?php endif ?>
+
     <p><?=$content ?></p>
     </div>
 </div>
-
 
 
 <?php $this->endBody() ?>

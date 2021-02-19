@@ -35,6 +35,9 @@ class PostController extends AppController
         //Изменение шаблона страницы только для отображения show
         //UPD: post/index -> шаблон main; post/show -> шаблон basic;
         //$this->layout = 'basic';
+        $this->view->title = 'Одна статья';
+        $this->view->registerMetaTag(['name' => 'keywords', 'content' => 'Ключевые слова']);
+        $this->view->registerMetaTag(['name' => 'description', 'content' => 'Описание страницы']);
         return $this->render('show');
     }
 
