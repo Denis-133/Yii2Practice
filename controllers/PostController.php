@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use Yii;
+//Подключим нашу модель для работы с формой
+use app\models\TestForm;
 
 class PostController extends AppController
 {
@@ -26,7 +28,12 @@ class PostController extends AppController
         }
         $names = ['Иванов','Петров','Сидоров'];
         //$this->myDebug($names);
-        return $this->render('test', ['names' => $names]);
+
+        //Создадим объект нашей модели для работы с формой
+        $model = new TestForm();
+        //Далее данный объект модели нужно передать в вид, через параметры
+        return $this->render('test', ['names' => $names, 'model'=>$model]);
+        //Можно использовать функцию compact return $this->render('test', compact('names', 'model'));
         //Тут вывожу с какого то херу шаблон test.php из view
     }
 
