@@ -31,6 +31,18 @@ class PostController extends AppController
 
         //Создадим объект нашей модели для работы с формой
         $model = new TestForm();
+        if ($model->load(Yii::$app->request->post()) ) {
+            if ($model->validate()) {
+                Yii::$app->session->setFlash('success','Форма отправлена успешно');
+                $this->refresh();
+            }
+            else {
+                Yii::$app->session->setFlash('error','Ошибка отправки формы');
+            }
+        }
+
+
+
         //Далее данный объект модели нужно передать в вид, через параметры
         return $this->render('test', ['names' => $names, 'model'=>$model]);
         //Можно использовать функцию compact return $this->render('test', compact('names', 'model'));

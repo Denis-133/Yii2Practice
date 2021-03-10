@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 // AJAX обработка формы, без перезагрузки страницы, но с перезагрузкой формы
-use yii\widgets\Pjax;
+//use yii\widgets\Pjax;
 ?>
 
 <h1>Страница Блога</h1>
@@ -21,9 +21,9 @@ $form = ActiveForm::begin([
     //'options' => ['data' => ['pjax' => true]],
 ]) ?>
     <!-- Передаем в форму атрибуты модели из её свойств -->
-    <?= $form->field($model, 'name')->textInput()->hint('Пожалуйста введите ваше имя')->label('Имя') ?>
-    <?= $form->field($model, 'email')->input('email')->hint('Пожалуйста введите вашу почту')->label('Почта') ?>
-    <?= $form->field($model, 'text')->textarea()->label('Ваше сообщение') ?>
+    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'email')->input('email') ?>
+    <?= $form->field($model, 'text')->textarea() ?>
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
@@ -33,3 +33,15 @@ $form = ActiveForm::begin([
 <?php ActiveForm::end();
 // Pjax::end();
 ?>
+
+<?php if (Yii::$app->session->hasFlash('success')): ?>
+    <div class="alert alert-success" role="alert">
+        <?php echo Yii::$app->session->getFlash('success'); ?>
+    </div>
+<?php endif ?>
+
+<?php if (Yii::$app->session->hasFlash('error')): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo Yii::$app->session->getFlash('error'); ?>
+    </div>
+<?php endif ?>
